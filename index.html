@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroBalance - Transforma Tu Mente, Transforma Tu Vida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --sage: #D4E7D4;
+            --terracotta: #E8C4B8;
+            --lavender: #E6E1F0;
+            --charcoal: #3D3D3D;
+            --warm-white: #FFFBF5;
+            --accent-gold: #D4AF37;
+            --soft-blue: #D9E8F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--cream);
+            background-image: 
+                radial-gradient(ellipse 800px 600px at 20% 30%, rgba(230, 225, 240, 0.6), transparent),
+                radial-gradient(ellipse 700px 500px at 80% 70%, rgba(232, 196, 184, 0.5), transparent),
+                radial-gradient(ellipse 600px 700px at 50% 50%, rgba(212, 231, 212, 0.45), transparent),
+                radial-gradient(circle 300px at 90% 20%, rgba(217, 232, 245, 0.4), transparent),
+                radial-gradient(circle 400px at 10% 80%, rgba(212, 175, 55, 0.15), transparent),
+                linear-gradient(125deg, 
+                    rgba(250, 247, 242, 0.9) 0%, 
+                    rgba(230, 225, 240, 0.7) 25%,
+                    rgba(255, 251, 245, 0.8) 50%,
+                    rgba(232, 196, 184, 0.6) 75%,
+                    rgba(212, 231, 212, 0.7) 100%
+                );
+            background-attachment: fixed;
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, rgba(212, 175, 55, 0.03) 0px, transparent 2px, transparent 4px),
+                repeating-linear-gradient(0deg, rgba(212, 231, 212, 0.03) 0px, transparent 2px, transparent 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            right: -10%;
+            bottom: -10%;
+            background-image:
+                radial-gradient(circle 2px at 20% 30%, rgba(212, 175, 55, 0.3), transparent),
+                radial-gradient(circle 2px at 60% 70%, rgba(212, 175, 55, 0.25), transparent),
+                radial-gradient(circle 1.5px at 80% 20%, rgba(230, 225, 240, 0.4), transparent),
+                radial-gradient(circle 2px at 30% 80%, rgba(232, 196, 184, 0.3), transparent),
+                radial-gradient(circle 1.5px at 90% 60%, rgba(212, 231, 212, 0.35), transparent);
+            background-size: 800px 800px, 600px 600px, 700px 700px, 500px 500px, 650px 650px;
+            background-position: 0 0, 100px 100px, 200px 50px, 50px 200px, 150px 150px;
+            pointer-events: none;
+            z-index: 1;
+            animation: float 60s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        header, section, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 30px 0;
+            background: 
+                radial-gradient(ellipse 600px 300px at 50% 0%, rgba(230, 225, 240, 0.15), transparent),
+                rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            letter-spacing: 2px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            animation: breathe 6s ease-in-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            30% { transform: scale(1.15); }
+        }
+        
+        /* Zen Animations - Peace & Tranquility */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes floatSlow {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) scale(1); 
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateY(-40px) translateX(20px) scale(1.1); 
+                opacity: 1;
+            }
+        }
+        
+        @keyframes zenPulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: scale(1.15);
+                opacity: 0.9;
+            }
+        }
+        
+        /* Zen particles background */
+        .zen-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .zen-particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(232, 196, 184, 0.2) 50%, transparent 100%);
+            border-radius: 50%;
+            animation: floatSlow 15s ease-in-out infinite;
+            filter: blur(30px);
+        }
+        
+        .zen-particle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-duration: 20s;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(230, 225, 240, 0.25) 50%, transparent 100%);
+        }
+        
+        .zen-particle:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            top: 60%;
+            right: 15%;
+            animation-duration: 25s;
+            animation-delay: -5s;
+            background: radial-gradient(circle, rgba(230, 225, 240, 0.4) 0%, rgba(212, 175, 55, 0.2) 50%, transparent 100%);
+        }
+        
+        .zen-particle:nth-child(3) {
+            width: 180px;
+            height: 180px;
+            bottom: 20%;
+            left: 20%;
+            animation-duration: 18s;
+            animation-delay: -10s;
+            background: radial-gradient(circle, rgba(212, 231, 212, 0.35) 0%, rgba(212, 175, 55, 0.15) 50%, transparent 100%);
+        }
+        
+        .zen-particle:nth-child(4) {
+            width: 220px;
+            height: 220px;
+            top: 40%;
+            right: 30%;
+            animation-duration: 22s;
+            animation-delay: -15s;
+            background: radial-gradient(circle, rgba(232, 196, 184, 0.4) 0%, rgba(230, 225, 240, 0.2) 50%, transparent 100%);
+        }
+        
+        .zen-particle:nth-child(5) {
+            width: 190px;
+            height: 190px;
+            top: 80%;
+            left: 50%;
+            animation-duration: 19s;
+            animation-delay: -8s;
+            background: radial-gradient(circle, rgba(230, 225, 240, 0.35) 0%, rgba(212, 231, 212, 0.2) 50%, transparent 100%);
+        }
+        
+        /* Zen ripple effect on sections */
+        .section-zen::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(230, 225, 240, 0.1) 40%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: zenPulse 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(40px);
+        }
+        
+        .section-zen {
+            position: relative;
+        }
+        
+        .section-zen > .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Floating elements */
+        .float-zen {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Smooth hover transitions */
+        .feature-card,
+        .expert-card,
+        .benefit-item,
+        .testimonial-card {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .feature-card:hover,
+        .expert-card:hover,
+        .benefit-item:hover,
+        .testimonial-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Water wave animation */
+        @keyframes wave {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .zen-wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 150px;
+            background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.08) 50%, rgba(230, 225, 240, 0.12) 100%);
+            animation: wave 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+        
+        .zen-wave:nth-child(2) {
+            animation-duration: 15s;
+            animation-delay: -5s;
+            opacity: 0.5;
+        }
+        
+        .heart {
+            transform-origin: center;
+            animation: heartbeat 2.5s ease-in-out infinite;
+        }
+        
+        .logo-text {
+            position: relative;
+        }
+
+        .logo-text::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 10px auto 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 60%;
+            height: 140%;
+            background: radial-gradient(ellipse at center, rgba(230, 225, 240, 0.5), transparent 70%);
+            filter: blur(60px);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 50%;
+            height: 120%;
+            background: radial-gradient(ellipse at center, rgba(232, 196, 184, 0.4), transparent 70%);
+            filter: blur(50px);
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-bottom: 25px;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0.85;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #C19A2E 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-primary:hover::before {
+            left: 100%;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 231, 212, 0.6), transparent 65%);
+            filter: blur(70px);
+            border-radius: 50%;
+        }
+        
+        .features::after {
+            content: '';
+            position: absolute;
+            bottom: 15%;
+            left: 8%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(217, 232, 245, 0.5), transparent 65%);
+            filter: blur(60px);
+            border-radius: 50%;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--charcoal);
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent-gold);
+            margin: 20px auto 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--charcoal);
+        }
+
+        .feature-card p {
+            color: var(--charcoal);
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        /* Book Preview Section */
+        .book-preview {
+            padding: 100px 0;
+            background-color: rgba(235, 230, 245, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-preview::before {
+            content: '';
+            position: absolute;
+            top: -15%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(230, 225, 240, 0.7), transparent 70%);
+            filter: blur(80px);
+        }
+        
+        .book-preview::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -5%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(212, 231, 212, 0.65), transparent 70%);
+            filter: blur(75px);
+        }
+        
+        .experts-intro {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+            opacity: 0.85;
+        }
+        
+        .experts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .expert-card {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .expert-card:nth-child(1) { animation-delay: 0.1s; }
+        .expert-card:nth-child(2) { animation-delay: 0.2s; }
+        .expert-card:nth-child(3) { animation-delay: 0.3s; }
+        .expert-card:nth-child(4) { animation-delay: 0.4s; }
+        .expert-card:nth-child(5) { animation-delay: 0.5s; }
+        .expert-card:nth-child(6) { animation-delay: 0.6s; }
+        .expert-card:nth-child(7) { animation-delay: 0.7s; }
+        .expert-card:nth-child(8) { animation-delay: 0.8s; }
+        
+        .expert-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .expert-icon {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .expert-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+        
+        .expert-card p {
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            opacity: 0.75;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 100px 0;
+            background: rgba(255, 251, 245, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefits::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: -8%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(232, 196, 184, 0.55), transparent 68%);
+            filter: blur(70px);
+        }
+        
+        .benefits::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            right: -10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.25), transparent 65%);
+            filter: blur(65px);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 30px;
+            background: rgba(212, 231, 212, 0.3);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .benefit-item:nth-child(1) { animation-delay: 0.1s; }
+        .benefit-item:nth-child(2) { animation-delay: 0.2s; }
+        .benefit-item:nth-child(3) { animation-delay: 0.3s; }
+        .benefit-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .benefit-item:hover {
+            background: rgba(212, 231, 212, 0.5);
+            transform: translateX(10px);
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .benefit-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .benefit-text h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--charcoal);
+        }
+
+        .benefit-text p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: rgba(225, 235, 250, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(217, 232, 245, 0.7), transparent 65%);
+            filter: blur(90px);
+        }
+        
+        .testimonials::after {
+            content: '';
+            position: absolute;
+            bottom: -15%;
+            right: 10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(230, 225, 240, 0.6), transparent 70%);
+            filter: blur(70px);
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--charcoal);
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            color: var(--accent-gold);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: rgba(240, 225, 215, 0.6);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 196, 184, 0.7), transparent 65%);
+            filter: blur(85px);
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(230, 225, 240, 0.65), transparent 68%);
+            filter: blur(80px);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--charcoal);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+            margin: 30px 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .price-tag small {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            display: block;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+        
+        /* V2 Payment Cards - Compact & Consistent */
+        .payment-grid-v2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            max-width: 900px;
+            margin: 35px auto 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .pay-card {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 14px;
+            padding: 20px 18px;
+            border: 1.5px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            text-align: center;
+        }
+        
+        .pay-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-gold);
+        }
+        
+        .pay-flag {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        
+        .pay-country {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--charcoal);
+            margin: 0 0 6px 0;
+            font-weight: 500;
+        }
+        
+        .pay-price {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin: 0 0 14px 0;
+        }
+        
+        .pay-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 14px 0;
+            min-height: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .pay-btn {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin: 14px 0 10px 0;
+            border: none;
+            cursor: pointer;
+            font-family: 'Jost', sans-serif;
+        }
+        
+        .pay-btn-solid {
+            background: linear-gradient(135deg, var(--accent-gold), #c19a2e);
+            color: white;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+        }
+        
+        .pay-btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+        }
+        
+        .pay-btn-outline {
+            background: linear-gradient(135deg, var(--accent-gold), #c19a2e);
+            color: white;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+        }
+        
+        .pay-btn-outline:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+        }
+        
+        .pay-methods {
+            font-size: 0.8rem;
+            color: var(--charcoal);
+            opacity: 0.65;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        /* Venezuela Payment Info */
+        .payment-info {
+            background: rgba(250, 247, 242, 0.8);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 12px 0;
+            text-align: left;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 0.85rem;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+        
+        .info-value {
+            font-weight: 600;
+            color: var(--charcoal);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .copy-btn {
+            background: var(--accent-gold);
+            border: none;
+            border-radius: 6px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .payment-grid-v2 {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0 30px;
+            background: rgba(61, 61, 61, 0.95);
+            color: white;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        /* Disclaimer Section */
+        .disclaimer {
+            background: rgba(212, 175, 55, 0.08);
+            border-left: 4px solid var(--accent-gold);
+            padding: 30px;
+            margin: 60px auto;
+            max-width: 900px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .disclaimer-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .disclaimer h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--charcoal);
+            margin-bottom: 15px;
+        }
+        
+        .disclaimer p {
+            color: var(--charcoal);
+            opacity: 0.85;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .whatsapp-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(37, 211, 102, 0.3);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+            }
+            
+            .whatsapp-float svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .experts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Zen Floating Particles -->
+    <div class="zen-particles">
+        <div class="zen-particle"></div>
+        <div class="zen-particle"></div>
+        <div class="zen-particle"></div>
+        <div class="zen-particle"></div>
+        <div class="zen-particle"></div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Brain (top) -->
+                    <path d="M30 30C30 22 40 18 50 18C60 18 70 22 70 30" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    <path d="M35 34C35 28 42 26 50 26C58 26 65 28 65 34" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+                    
+                    <!-- Mind/Consciousness (middle) -->
+                    <circle cx="50" cy="50" r="10" stroke="#D4AF37" stroke-width="2" fill="none"/>
+                    <circle cx="50" cy="50" r="5" fill="#D4AF37" opacity="0.35"/>
+                    
+                    <!-- Connecting flow -->
+                    <line x1="50" y1="36" x2="50" y2="40" stroke="#D4AF37" stroke-width="1.5"/>
+                    <line x1="50" y1="60" x2="50" y2="64" stroke="#D4AF37" stroke-width="1.5"/>
+                    
+                    <!-- Heart (bottom) with animation -->
+                    <path class="heart" d="M50 70C50 70 40 65 36 68C32 71 34 78 50 85C66 78 68 71 64 68C60 65 50 70 50 70Z" fill="#E8C4B8" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                
+                <div class="logo-text">NeuroBalance</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero section-zen">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Conoce Cómo Piensas,<br>Cambia Cómo Vives</h1>
+                <p class="subtitle">Descubre el poder de la neuroplasticidad y reprograma tu cerebro para alcanzar el bienestar emocional y mental que mereces</p>
+                <a href="#comprar" class="cta-primary">Comienza Tu Transformación</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features section-zen">
+        <div class="container">
+            <h2 class="section-title">Fundamentos Científicos del Cambio Mental</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#E6E1F0" opacity="0.3"/>
+                            <path d="M30 50C30 38.954 38.954 30 50 30C61.046 30 70 38.954 70 50" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M35 55C35 47.268 41.268 41 49 41" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M65 55C65 47.268 58.732 41 51 41" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="42" cy="45" r="2.5" fill="#D4AF37"/>
+                            <circle cx="58" cy="45" r="2.5" fill="#D4AF37"/>
+                            <path d="M45 60Q50 65 55 60" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+                            <path d="M25 35Q30 30 35 35" stroke="#D4E7D4" stroke-width="2" stroke-linecap="round" fill="none"/>
+                            <path d="M65 35Q70 30 75 35" stroke="#D4E7D4" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3>Neuroplasticidad</h3>
+                    <p>Aprende cómo tu cerebro puede cambiar y adaptarse a cualquier edad, creando nuevos patrones de pensamiento positivos</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#E8C4B8" opacity="0.2"/>
+                            <circle cx="50" cy="50" r="35" stroke="#D4AF37" stroke-width="2" opacity="0.4"/>
+                            <circle cx="50" cy="50" r="25" stroke="#D4AF37" stroke-width="2.5" opacity="0.6"/>
+                            <circle cx="50" cy="50" r="15" stroke="#D4AF37" stroke-width="3"/>
+                            <path d="M50 15L52 25L50 35" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M50 65L52 75L50 85" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M15 50L25 52L35 50" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M65 50L75 52L85 50" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="50" cy="50" r="6" fill="#D4AF37"/>
+                        </svg>
+                    </div>
+                    <h3>Regulación Emocional</h3>
+                    <p>Técnicas validadas para gestionar tus emociones y alcanzar un estado de equilibrio psicológico duradero</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="65" rx="30" ry="8" fill="#D4E7D4" opacity="0.3"/>
+                            <path d="M50 25C50 25 35 30 35 45C35 55 40 60 50 70C60 60 65 55 65 45C65 30 50 25 50 25Z" fill="#E6E1F0" opacity="0.4" stroke="#D4AF37" stroke-width="2"/>
+                            <path d="M45 45C45 45 47 50 50 52C53 50 55 45 55 45" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+                            <circle cx="50" cy="30" r="3" fill="#D4AF37"/>
+                            <path d="M40 40L43 37M60 40L57 37" stroke="#D4E7D4" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M35 55C35 55 40 58 45 58M65 55C65 55 60 58 55 58" stroke="#D4E7D4" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Psicología Positiva</h3>
+                    <p>Estrategias respaldadas por la investigación para desarrollar resiliencia, bienestar y propósito vital</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#D9E8F5" opacity="0.3"/>
+                            <path d="M50 25V50L65 65" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="50" cy="50" r="22" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                            <circle cx="50" cy="28" r="2" fill="#D4AF37"/>
+                            <circle cx="72" cy="50" r="2" fill="#D4AF37"/>
+                            <circle cx="50" cy="72" r="2" fill="#D4AF37"/>
+                            <circle cx="28" cy="50" r="2" fill="#D4AF37"/>
+                            <path d="M40 40Q45 35 50 40T60 40" stroke="#D4E7D4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3>Sistemas de Hábitos</h3>
+                    <p>Construye sistemas efectivos de mejora continua, porque no alcanzas tus metas, caes al nivel de tus sistemas</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#E8C4B8" opacity="0.25"/>
+                            <path d="M50 30C50 30 35 35 35 50C35 65 50 75 50 75C50 75 65 65 65 50C65 35 50 30 50 30Z" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                            <circle cx="50" cy="50" r="12" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                            <path d="M50 38V50M50 50L58 50" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="50" cy="32" r="2.5" fill="#D4AF37"/>
+                            <path d="M38 42L42 38M58 42L62 38" stroke="#D4E7D4" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M38 58L42 62M58 58L62 62" stroke="#D4E7D4" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Identidad y Cambio</h3>
+                    <p>Cada acción es un voto por el tipo de persona que deseas ser. Transforma tu identidad, no solo tu conducta</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#D4E7D4" opacity="0.3"/>
+                            <path d="M35 55L40 50L45 55L50 45L55 55L60 50L65 55" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <circle cx="40" cy="50" r="3" fill="#D4AF37"/>
+                            <circle cx="50" cy="45" r="3" fill="#D4AF37"/>
+                            <circle cx="60" cy="50" r="3" fill="#D4AF37"/>
+                            <path d="M30 65C30 65 35 62 40 62M70 65C70 65 65 62 60 62" stroke="#D4E7D4" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M45 30L48 35L45 40M55 30L52 35L55 40" stroke="#D4E7D4" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="50" cy="70" r="2" fill="#D4AF37" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <h3>Mejora del 1%</h3>
+                    <p>Pequeñas mejoras diarias se componen en resultados extraordinarios. El progreso es acumulativo, no instantáneo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="book-preview">
+        <div class="container">
+            <h2 class="section-title">Conocimiento Respaldado por Expertos</h2>
+            <div class="experts-intro">
+                <p class="intro-text">Nuestros tomos integran los descubrimientos más relevantes de reconocidos profesionales en psicología, neurociencia y desarrollo personal. Cada página está diseñada para guiarte paso a paso en tu proceso de transformación mental, con ejercicios prácticos y reflexiones fundamentadas en la ciencia.</p>
+            </div>
+            
+            <div class="experts-grid">
+                <div class="expert-card">
+                    <div class="expert-icon">✦</div>
+                    <h4>Marian Rojas Estapé</h4>
+                    <p>Psiquiatría y gestión emocional</p>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-icon">✦</div>
+                    <h4>Joe Dispenza</h4>
+                    <p>Neuroplasticidad y meditación</p>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-icon">✦</div>
+                    <h4>Viktor Frankl</h4>
+                    <p>Logoterapia y sentido de vida</p>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-icon">✦</div>
+                    <h4>Carl Jung</h4>
+                    <p>Psicología analítica</p>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-icon">✦</div>
+                    <h4>James Clear</h4>
+                    <p>Formación de hábitos</p>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-icon">✦</div>
+                    <h4>Martin Seligman</h4>
+                    <p>Psicología positiva</p>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-icon">✦</div>
+                    <h4>Rafael Vidac</h4>
+                    <p>Mentalidad de abundancia</p>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-icon">✦</div>
+                    <h4>Y muchos más...</h4>
+                    <p>Compendio de expertos reconocidos</p>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px; font-size: 0.95rem; opacity: 0.8; font-style: italic;">
+                *Esta colección se basa en conceptos, estudios y metodologías de estos y otros expertos reconocidos en sus campos. No implica endorsement directo de los autores mencionados.
+            </p>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#comprar" class="cta-primary">Accede al Conocimiento</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Lo Que Lograrás</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="35" r="20" stroke="#D4AF37" stroke-width="3" fill="none"/>
+                            <path d="M50 55V75M40 65H60M45 75H55" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="50" cy="35" r="8" fill="#D4AF37"/>
+                            <path d="M42 32L45 35L42 38M58 32L55 35L58 38" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <h4>Claridad Mental</h4>
+                        <p>Desarrolla la capacidad de tomar decisiones conscientes y alineadas con tus valores más profundos</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30 70C30 70 25 60 25 50C25 35 35 25 50 25C65 25 75 35 75 50C75 60 70 70 70 70" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M35 65L40 55L45 65L50 50L55 65L60 55L65 65" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                            <circle cx="50" cy="30" r="4" fill="#D4AF37"/>
+                            <path d="M43 38C43 38 46 42 50 42C54 42 57 38 57 38" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <h4>Resiliencia Emocional</h4>
+                        <p>Construye una base sólida para enfrentar los desafíos de la vida con serenidad y fortaleza</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="25" stroke="#D4AF37" stroke-width="2.5" opacity="0.3"/>
+                            <path d="M50 25V35M50 65V75M25 50H35M65 50H75" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="50" cy="50" r="15" stroke="#D4AF37" stroke-width="3"/>
+                            <path d="M40 50C40 44.477 44.477 40 50 40C55.523 40 60 44.477 60 50" stroke="#D4E7D4" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="50" cy="50" r="5" fill="#D4AF37"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <h4>Paz Interior</h4>
+                        <p>Cultiva un estado de calma profunda que permanece contigo incluso en momentos difíciles</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 70C38.954 70 30 61.046 30 50C30 38.954 38.954 30 50 30" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M50 30C61.046 30 70 38.954 70 50C70 61.046 61.046 70 50 70" stroke="#D4E7D4" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M50 20L50 35L65 35" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <circle cx="50" cy="50" r="8" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                            <path d="M48 48L50 50L55 45" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <h4>Transformación Real</h4>
+                        <p>Experimenta cambios duraderos en tu forma de pensar, sentir y actuar en el mundo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Historias de Transformación</h2>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Estos tomos cambiaron completamente mi perspectiva sobre el estrés y la ansiedad. Las herramientas son prácticas y los resultados son reales. Me siento más en paz conmigo misma que nunca."</p>
+                <p class="testimonial-author">— María L., Barcelona</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Como profesional de la salud, aprecio el rigor científico detrás de cada consejo. Es un puente perfecto entre la neurociencia y la aplicación práctica en la vida diaria."</p>
+                <p class="testimonial-author">— Dr. Carlos M., Madrid</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="comprar">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Comienza Tu Transformación</h2>
+                <p>Tu mente es tu recurso más valioso. Dale las herramientas que necesita para florecer.</p>
+                
+                <a href="https://wa.me/1234567890?text=Hola,%20quiero%20información%20sobre%20los%20tomos%20de%20NeuroBalance" class="cta-primary" target="_blank" style="display: inline-block; margin-top: 30px;">
+                    Más Información
+                </a>
+                
+                <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.75; text-align: center;">
+                    ✓ Garantía 30 días · ✓ Descarga inmediata · ✓ Actualizaciones gratis
+            </div>
+            
+            <div class="disclaimer">
+                <svg class="disclaimer-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" stroke="#D4AF37" stroke-width="3" fill="none"/>
+                    <path d="M50 30V55" stroke="#D4AF37" stroke-width="3.5" stroke-linecap="round"/>
+                    <circle cx="50" cy="68" r="3.5" fill="#D4AF37"/>
+                </svg>
+                <h4>Aviso Importante</h4>
+                <p>Este material educativo complementa, pero no sustituye, la atención profesional de psicólogos, psiquiatras o terapeutas cualificados. Si experimentas síntomas de ansiedad, depresión u otras condiciones de salud mental, te recomendamos encarecidamente consultar con un profesional de la salud mental autorizado. En situaciones de crisis o emergencia, contacta inmediatamente con los servicios de emergencia de tu localidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="color: white; margin-bottom: 20px;">
+                    <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Brain (top) -->
+                        <path d="M30 30C30 22 40 18 50 18C60 18 70 22 70 30" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        <path d="M35 34C35 28 42 26 50 26C58 26 65 28 65 34" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+                        
+                        <!-- Mind/Consciousness (middle) -->
+                        <circle cx="50" cy="50" r="10" stroke="#D4AF37" stroke-width="2" fill="none"/>
+                        <circle cx="50" cy="50" r="5" fill="#D4AF37" opacity="0.35"/>
+                        
+                        <!-- Connecting flow -->
+                        <line x1="50" y1="36" x2="50" y2="40" stroke="#D4AF37" stroke-width="1.5"/>
+                        <line x1="50" y1="60" x2="50" y2="64" stroke="#D4AF37" stroke-width="1.5"/>
+                        
+                        <!-- Heart (bottom) -->
+                        <path class="heart" d="M50 70C50 70 40 65 36 68C32 71 34 78 50 85C66 78 68 71 64 68C60 65 50 70 50 70Z" fill="#E8C4B8" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <div class="logo-text" style="color: white;">NeuroBalance</div>
+                </div>
+                <p style="opacity: 0.7; max-width: 600px; margin: 0 auto 20px;">Transformando vidas a través del conocimiento científico y la sabiduría práctica</p>
+                <div class="footer-links">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos y Condiciones</a>
+                    <a href="#">Contacto</a>
+                    <a href="#">Preguntas Frecuentes</a>
+                </div>
+                <p class="copyright">© 2026 NeuroBalance. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20los%20tomos%20de%20NeuroBalance" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp">
+        <div class="whatsapp-pulse"></div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.833.744 5.49 2.047 7.793L0 32l8.358-2.094A15.926 15.926 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0z" fill="#fff"/>
+            <path d="M25.5 22.2c-.3.9-1.8 1.7-2.9 1.9-.8.1-1.8.2-5.3-1.1-4.4-1.7-7.2-6.2-7.4-6.5-.2-.3-1.8-2.4-1.8-4.6s1.1-3.3 1.5-3.7c.4-.4.9-.5 1.2-.5.3 0 .6 0 .8.1.3 0 .6.1.9.7.4.8 1.2 3 1.3 3.2.1.2.2.5.1.8-.1.3-.2.4-.4.6-.2.2-.4.5-.6.7-.2.2-.4.4-.2.8.2.4 1.1 1.8 2.4 2.9 1.7 1.4 3.1 1.9 3.5 2.1.4.2.6.2.8-.1.2-.3.9-1.1 1.2-1.4.3-.3.5-.3.9-.1.4.2 2.4 1.1 2.8 1.3.4.2.7.3.8.5.1.2.1 1-.2 1.9z" fill="#25D366"/>
+        </svg>
+    </a>
+
+    <script>
+        // Smooth scroll para los enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación de aparición al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .benefit-item, .testimonial-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Toggle Venezuela payment info
+        function toggleVenezuelaInfo() {
+            const info = document.getElementById('venezuela-info');
+            if (info.style.display === 'none') {
+                info.style.display = 'block';
+            } else {
+                info.style.display = 'none';
+            }
+        }
+        
+        // Copy to clipboard function
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Visual feedback
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓';
+                btn.style.background = '#00A859';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#D4AF37';
+                }, 1500);
+            }).catch(err => {
+                alert('Copiado: ' + text);
+            });
+        }
+    </script>
+</body>
+</html>
