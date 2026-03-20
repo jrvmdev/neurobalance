@@ -10,7 +10,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap"></noscript>
 
 <style>
 :root {
@@ -19,7 +21,7 @@
   --gold:    #C8A22E;
   --gold-lt: #E8D282;
   --gold-dk: #9A7A1E;
-  --stone:   #8A8278;
+  --stone:   #6B6560;
   --blush:   #E8C4B8;
   --sage:    #BDD4BD;
   --mist:    #EAE6F0;
@@ -107,7 +109,7 @@ section{padding:100px 0}
 .expert-item{background:var(--white);padding:28px 22px;transition:background .22s}
 .expert-item:hover{background:rgba(200,162,46,.05)}
 .expert-diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);margin-bottom:14px}
-.expert-item h4{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--ink);margin-bottom:5px}
+.expert-item h3{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--ink);margin-bottom:5px}
 .expert-item p{font-size:.8rem;color:var(--stone)}
 .experts-note{text-align:center;margin-top:28px;font-size:.8rem;color:var(--stone);font-style:italic}
 
@@ -119,7 +121,7 @@ section{padding:100px 0}
 .benefit:hover{padding-left:8px}
 .benefit-icon{width:40px;height:40px;flex-shrink:0;color:var(--gold);margin-top:2px}
 .benefit-icon svg{width:100%;height:100%}
-.benefit-text h4{font-family:var(--serif);font-size:1.3rem;font-weight:500;color:var(--ink);margin-bottom:6px}
+.benefit-text .benefit-title{font-family:var(--serif);font-size:1.3rem;font-weight:500;color:var(--ink);margin-bottom:6px}
 .benefit-text p{font-size:.88rem;color:var(--stone);line-height:1.7}
 .benefits-visual{display:flex;flex-direction:column;gap:16px}
 .bv-card{background:var(--white);border-radius:16px;padding:28px;border:1px solid rgba(200,162,46,.14);box-shadow:0 4px 20px rgba(28,26,23,.05)}
@@ -177,8 +179,8 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:56px 0 32px}
 .footer-brand svg{width:28px;height:28px}
 .footer-brand-name{font-family:var(--serif);font-size:1.2rem;color:var(--cream);font-weight:400}
 .footer-links{display:flex;gap:28px;flex-wrap:wrap;justify-content:center}
-.footer-links a{font-size:.8rem;color:rgba(250,247,242,.45);text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:var(--gold)}
+.footer-links a{font-size:.8rem;color:rgba(250,247,242,.5);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(250,247,242,.2);transition:color .2s,text-decoration-color .2s}
+.footer-links a:hover{color:var(--gold);text-decoration-color:var(--gold)}
 .footer-copy{font-size:.75rem;letter-spacing:.3px}
 
 /* WHATSAPP */
@@ -394,14 +396,14 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:56px 0 32px}
       </div>
     </div>
     <div class="experts-list reveal">
-      <div class="expert-item"><div class="expert-diamond"></div><h4>Marian Rojas Estapé</h4><p>Psiquiatría y gestión emocional</p></div>
-      <div class="expert-item"><div class="expert-diamond"></div><h4>Joe Dispenza</h4><p>Neuroplasticidad y meditación</p></div>
-      <div class="expert-item"><div class="expert-diamond"></div><h4>Viktor Frankl</h4><p>Logoterapia y sentido de vida</p></div>
-      <div class="expert-item"><div class="expert-diamond"></div><h4>Carl Jung</h4><p>Psicología analítica</p></div>
-      <div class="expert-item"><div class="expert-diamond"></div><h4>James Clear</h4><p>Formación de hábitos</p></div>
-      <div class="expert-item"><div class="expert-diamond"></div><h4>Martin Seligman</h4><p>Psicología positiva</p></div>
-      <div class="expert-item"><div class="expert-diamond"></div><h4>Rafael Vidac</h4><p>Mentalidad de abundancia</p></div>
-      <div class="expert-item"><div class="expert-diamond"></div><h4>Y muchos más</h4><p>Compendio de expertos reconocidos</p></div>
+      <div class="expert-item"><div class="expert-diamond"></div><h3>Marian Rojas Estapé</h3><p>Psiquiatría y gestión emocional</p></div>
+      <div class="expert-item"><div class="expert-diamond"></div><h3>Joe Dispenza</h3><p>Neuroplasticidad y meditación</p></div>
+      <div class="expert-item"><div class="expert-diamond"></div><h3>Viktor Frankl</h3><p>Logoterapia y sentido de vida</p></div>
+      <div class="expert-item"><div class="expert-diamond"></div><h3>Carl Jung</h3><p>Psicología analítica</p></div>
+      <div class="expert-item"><div class="expert-diamond"></div><h3>James Clear</h3><p>Formación de hábitos</p></div>
+      <div class="expert-item"><div class="expert-diamond"></div><h3>Martin Seligman</h3><p>Psicología positiva</p></div>
+      <div class="expert-item"><div class="expert-diamond"></div><h3>Rafael Vidac</h3><p>Mentalidad de abundancia</p></div>
+      <div class="expert-item"><div class="expert-diamond"></div><h3>Y muchos más</h3><p>Compendio de expertos reconocidos</p></div>
     </div>
     <p class="experts-note">*Esta colección se basa en conceptos y metodologías de estos expertos. No implica endorsement directo de los autores mencionados.</p>
   </div>
@@ -417,19 +419,19 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:56px 0 32px}
         <div>
           <div class="benefit">
             <div class="benefit-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="16" r="8" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M20 24V32M14 30H26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="20" cy="16" r="3" fill="currentColor" opacity=".4"/></svg></div>
-            <div class="benefit-text"><h4>Claridad Mental</h4><p>Toma decisiones conscientes y alineadas con tus valores más profundos.</p></div>
+            <div class="benefit-text"><h3 class="benefit-title">Claridad Mental</h3><p>Toma decisiones conscientes y alineadas con tus valores más profundos.</p></div>
           </div>
           <div class="benefit">
             <div class="benefit-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 8C20 8 10 12 10 22C10 30 20 36 20 36C20 36 30 30 30 22C30 12 20 8 20 8Z" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M14 20L18 24L26 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="benefit-text"><h4>Resiliencia Emocional</h4><p>Enfrenta los desafíos de la vida con serenidad y fortaleza sostenida.</p></div>
+            <div class="benefit-text"><h3 class="benefit-title">Resiliencia Emocional</h3><p>Enfrenta los desafíos de la vida con serenidad y fortaleza sostenida.</p></div>
           </div>
           <div class="benefit">
             <div class="benefit-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1.5" opacity=".4" fill="none"/><circle cx="20" cy="20" r="2" fill="currentColor"/><path d="M20 8V12M20 28V32M8 20H12M28 20H32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-            <div class="benefit-text"><h4>Paz Interior</h4><p>Cultiva un estado de calma profunda que permanece incluso en momentos difíciles.</p></div>
+            <div class="benefit-text"><h3 class="benefit-title">Paz Interior</h3><p>Cultiva un estado de calma profunda que permanece incluso en momentos difíciles.</p></div>
           </div>
           <div class="benefit">
             <div class="benefit-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="6,28 14,20 20,24 26,14 34,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M28 8H34V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="benefit-text"><h4>Transformación Real</h4><p>Cambios duraderos en tu forma de pensar, sentir y actuar en el mundo.</p></div>
+            <div class="benefit-text"><h3 class="benefit-title">Transformación Real</h3><p>Cambios duraderos en tu forma de pensar, sentir y actuar en el mundo.</p></div>
           </div>
         </div>
       </div>
