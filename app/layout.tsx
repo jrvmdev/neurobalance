@@ -1,11 +1,11 @@
-﻿import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+﻿import { Cormorant, DM_Sans } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 
-const displayFont = Cormorant_Garamond({
+const displayFont = Cormorant({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
 });
 
 const bodyFont = DM_Sans({
@@ -15,9 +15,9 @@ const bodyFont = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "NeuroBalance | Coleccion de 7 tomos para transformar tu mente",
+  title: "NeuroBalance — Transforma Tu Mente, Transforma Tu Vida",
   description:
-    "Coleccion digital de bienestar mental y neurociencia aplicada con compra directa y entregas semanales.",
+    "Colección de guías digitales sobre neuroplasticidad, hábitos y psicología positiva. Conoce cómo piensas, cambia cómo vives.",
 };
 
 export default function RootLayout({

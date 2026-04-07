@@ -15,8 +15,7 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
   const [message, setMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  const activeMethod =
-    methods.find((method) => method.provider === selectedProvider) ?? methods[0];
+  const activeMethod = methods.find((method) => method.provider === selectedProvider) ?? methods[0];
 
   async function handleSubmit(formData: FormData) {
     setMessage(null);
@@ -44,7 +43,7 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
       };
 
       if (!response.ok || !result.ok || !result.redirectUrl) {
-        setMessage(result.message ?? "No pudimos iniciar la compra todavia.");
+        setMessage(result.message ?? "No pudimos iniciar la compra todavía.");
         return;
       }
 
@@ -53,8 +52,8 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
   }
 
   return (
-    <div className="pricing-card reveal">
-      <div className="pricing-tabs">
+    <div className="pricing-card reveal is-visible">
+      <div className="pricing-tabs" role="tablist" aria-label="Métodos de pago">
         {methods.map((method) => {
           const isActive = method.provider === selectedProvider;
           return (
@@ -69,14 +68,15 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
           );
         })}
       </div>
-      <div className="pricing-panels pricing-panels-live">
+
+      <div className="pricing-panels">
         <div className="ppanel active">
-          <div className="ppanel-price">$29.900</div>
-          <div className="ppanel-currency">ARS - Argentina</div>
+          <div className="ppanel-price">ARS 29.900</div>
+          <div className="ppanel-currency">Colección completa de 7 tomos</div>
           <div className="ppanel-methods">
-            <div className="pmethod">{activeMethod.badge}</div>
-            <div className="pmethod">{activeMethod.summary}</div>
-            <div className="pmethod">{activeMethod.helper}</div>
+            <div className="checkout-method-copy">{activeMethod.badge}</div>
+            <div className="checkout-helper">{activeMethod.summary}</div>
+            <div className="checkout-note">{activeMethod.helper}</div>
           </div>
 
           <form action={handleSubmit} className="nb-checkout-form">
