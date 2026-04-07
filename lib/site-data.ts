@@ -127,12 +127,12 @@ export const mainProduct: Product = {
   slug: "coleccion-7-tomos",
   name: "Coleccion NeuroBalance de 7 tomos",
   shortDescription:
-    "La coleccion completa se puede comprar siempre. El cliente entra con precio promocional anticipado y recibe 2 tomos en la semana 1, luego 1 tomo por semana hasta completar los 7.",
-  heroPrice: "Precio promocional anticipado: USD 29 / ARS 29.900",
+    "Guias digitales disenadas con rigor cientifico para reprogramar tu mente, construir habitos duraderos y alcanzar el equilibrio emocional que mereces.",
+  heroPrice: "Precio promocional anticipado: ARS 29.900",
   arsAmount: 29900,
   usdAmount: 29,
   format: "PDFs digitales",
-  delivery: "Email automatico y reenvio manual si hace falta",
+  delivery: "2 tomos en la semana 1 y luego 1 por semana",
   releaseModel: "Semana 1 se entregan tomo 1 y 2. Desde la semana 2 se entrega 1 tomo por semana hasta completar los 7.",
   supportChannels: ["Email", "WhatsApp", "Instagram"],
   volumes: collectionVolumes,
@@ -153,28 +153,20 @@ export const purchaseMethods: PurchaseMethod[] = [
     helper: "Flujo automatico ideal para ventas en Argentina.",
   },
   {
-    provider: "stripe",
-    title: "Internacional",
-    badge: "Stripe Checkout",
-    summary: "Paga en USD con tarjeta internacional y recibe confirmacion al completar la compra.",
-    buttonLabel: "Comprar con Stripe",
-    helper: "Perfecto para clientes fuera de Argentina.",
-  },
-  {
     provider: "transfer",
     title: "Transferencia",
     badge: "Soporte manual",
     summary: "Completas tus datos, envias comprobante y activamos el acceso sin friccion innecesaria.",
     buttonLabel: "Reservar por transferencia",
-    helper: "Canal secundario para quien no puede usar checkout automatico.",
+    helper: "Canal secundario para quien no puede usar Mercado Pago.",
   },
 ];
 
 export const trustPoints = [
-  "La coleccion completa se puede comprar en cualquier momento",
-  "Precio promocional anticipado para entrar antes de que esten los 7 tomos publicados",
-  "Semana 1 recibes 2 tomos y despues 1 por semana",
-  "Soporte por email, WhatsApp o Instagram si necesitas reenvio",
+  "Garantia 30 dias",
+  "Entrega semanal sin perder el precio promocional",
+  "Pago 100% seguro con Mercado Pago o transferencia",
+  "Soporte humano solo si hace falta",
 ];
 
 export const faqs = [
@@ -189,9 +181,9 @@ export const faqs = [
       "Si. La coleccion completa se puede seguir comprando tambien cuando ya esten publicados los 7 tomos.",
   },
   {
-    question: "El precio promocional anticipado para que sirve?",
+    question: "Tengo que hablar por WhatsApp para comprar?",
     answer:
-      "Sirve para entrar antes con mejor precio, aunque la entrega completa se termine de liberar semana a semana.",
+      "No. WhatsApp queda como canal de soporte y reenvio. El flujo principal de compra es directo desde la web.",
   },
   {
     question: "Que pasa si no encuentro el mail o necesito reenvio?",
@@ -201,8 +193,8 @@ export const faqs = [
 ];
 
 export const launchChecklist = [
-  "Cobro automatico por Mercado Pago y Stripe",
-  "Email automatico al detectar el pago",
+  "Cobro automatico por Mercado Pago",
+  "Transferencia como respaldo",
   "Entrega inmediata de 2 tomos en la semana 1",
   "Envio semanal de 1 tomo hasta completar los 7",
   "Reenvio manual desde admin cuando haga falta",
@@ -225,10 +217,10 @@ export const mockOrders: OrderRecord[] = [
     customerEmail: "cliente2@ejemplo.com",
     customerName: "Daniel Torres",
     productSlug: mainProduct.slug,
-    provider: "stripe",
+    provider: "mercadopago",
     status: "pending",
-    amount: mainProduct.usdAmount,
-    currency: "USD",
+    amount: mainProduct.arsAmount,
+    currency: "ARS",
     createdAt: "2026-04-06T12:15:00.000Z",
   },
   {
@@ -243,4 +235,3 @@ export const mockOrders: OrderRecord[] = [
     createdAt: "2026-04-06T12:22:00.000Z",
   },
 ];
-

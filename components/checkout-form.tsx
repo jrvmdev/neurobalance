@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useTransition } from "react";
 import { PurchaseMethod } from "@/lib/types";
@@ -9,8 +9,9 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
-  const [selectedProvider, setSelectedProvider] =
-    useState<PurchaseMethod["provider"]>("mercadopago");
+  const [selectedProvider, setSelectedProvider] = useState<PurchaseMethod["provider"]>(
+    methods[0]?.provider ?? "mercadopago",
+  );
   const [message, setMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -43,7 +44,7 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
       };
 
       if (!response.ok || !result.ok || !result.redirectUrl) {
-        setMessage(result.message ?? "No pudimos iniciar la compra todavía.");
+        setMessage(result.message ?? "No pudimos iniciar la compra todavia.");
         return;
       }
 
@@ -52,50 +53,50 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
   }
 
   return (
-    <div className="card checkout-card">
-      <div className="checkout-methods" role="tablist" aria-label="Métodos de compra">
+    <div className="pricing-card reveal">
+      <div className="pricing-tabs">
         {methods.map((method) => {
           const isActive = method.provider === selectedProvider;
-
           return (
             <button
               key={method.provider}
               type="button"
-              className={`method-pill${isActive ? " active" : ""}`}
-              role="tab"
-              aria-selected={isActive}
+              className={`ptab${isActive ? " active" : ""}`}
               onClick={() => setSelectedProvider(method.provider)}
             >
-              <span>{method.title}</span>
-              <strong>{method.badge}</strong>
+              {method.title}
             </button>
           );
         })}
       </div>
+      <div className="pricing-panels pricing-panels-live">
+        <div className="ppanel active">
+          <div className="ppanel-price">$29.900</div>
+          <div className="ppanel-currency">ARS - Argentina</div>
+          <div className="ppanel-methods">
+            <div className="pmethod">{activeMethod.badge}</div>
+            <div className="pmethod">{activeMethod.summary}</div>
+            <div className="pmethod">{activeMethod.helper}</div>
+          </div>
 
-      <div className="checkout-summary">
-        <p className="checkout-badge">{activeMethod.badge}</p>
-        <h3>{activeMethod.title}</h3>
-        <p>{activeMethod.summary}</p>
-        <span>{activeMethod.helper}</span>
+          <form action={handleSubmit} className="nb-checkout-form">
+            <input type="hidden" name="productSlug" value={productSlug} />
+            <label>
+              Nombre
+              <input required name="customerName" placeholder="Tu nombre" />
+            </label>
+            <label>
+              Email
+              <input required type="email" name="customerEmail" placeholder="tu@email.com" />
+            </label>
+            <button className="ppanel-btn" type="submit" disabled={isPending}>
+              {isPending ? "Preparando compra..." : activeMethod.buttonLabel}
+            </button>
+          </form>
+
+          {message ? <p className="checkout-inline-error">{message}</p> : null}
+        </div>
       </div>
-
-      <form action={handleSubmit} className="checkout-form">
-        <input type="hidden" name="productSlug" value={productSlug} />
-        <label>
-          Nombre
-          <input required name="customerName" placeholder="Tu nombre" />
-        </label>
-        <label>
-          Email
-          <input required type="email" name="customerEmail" placeholder="tu@email.com" />
-        </label>
-        <button className="button-primary" type="submit" disabled={isPending}>
-          {isPending ? "Preparando compra..." : activeMethod.buttonLabel}
-        </button>
-      </form>
-
-      {message ? <p className="checkout-message">{message}</p> : null}
     </div>
   );
 }

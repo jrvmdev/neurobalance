@@ -1,23 +1,23 @@
+﻿import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const displayFont = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["400", "500", "600"],
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-body",
   weight: ["400", "500", "600", "700"],
 });
 
+const bodyFont = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["300", "400", "500", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "NeuroBalance | ColecciÃ³n de 7 tomos para transformar tu mente",
+  title: "NeuroBalance | Coleccion de 7 tomos para transformar tu mente",
   description:
-    "ColecciÃ³n de ebooks de bienestar mental y neurociencia aplicada con compra directa, entrega automÃ¡tica y acceso inmediato.",
+    "Coleccion digital de bienestar mental y neurociencia aplicada con compra directa y entregas semanales.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body className={`${fraunces.variable} ${manrope.variable}`}>{children}</body>
+      <body className={`${displayFont.variable} ${bodyFont.variable}`}>{children}</body>
     </html>
   );
 }
