@@ -45,7 +45,18 @@ export function hasDatabaseConfigured() {
   return Boolean(optionalEnv.databaseUrl);
 }
 
+export function getDatabaseUrl() {
+  return optionalEnv.databaseUrl;
+}
+
+export function hasBlobConfigured() {
+  return Boolean(optionalEnv.blobToken);
+}
+
+export function getBlobToken() {
+  return optionalEnv.blobToken;
+}
+
 export function getAdminEmail() {
   return optionalEnv.adminEmail ?? "admin@neurobalance.local";
 }
-

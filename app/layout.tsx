@@ -15,9 +15,46 @@ const bodyFont = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "NeuroBalance — Transforma Tu Mente, Transforma Tu Vida",
+  title: {
+    default: "NeuroBalance | Biblioteca digital de neurociencia aplicada y bienestar mental",
+    template: "%s | NeuroBalance",
+  },
   description:
-    "Colección de guías digitales sobre neuroplasticidad, hábitos y psicología positiva. Conoce cómo piensas, cambia cómo vives.",
+    "NeuroBalance desarrolla colecciones digitales sobre neuroplasticidad, regulacion emocional, habitos, bienestar emocional y transformacion personal con base cientifica.",
+  keywords: [
+    "neurobalance",
+    "neurociencia aplicada",
+    "bienestar mental",
+    "regulacion emocional",
+    "habitos",
+    "neuroplasticidad",
+    "psicologia positiva",
+    "biblioteca digital",
+    "colecciones digitales",
+    "ebooks bienestar",
+  ],
+  category: "education",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "NeuroBalance | Biblioteca digital de neurociencia aplicada y bienestar mental",
+    description:
+      "Colecciones digitales para comprender la mente, cultivar bienestar real y aplicar herramientas practicas con base cientifica.",
+    type: "website",
+    locale: "es_ES",
+    siteName: "NeuroBalance",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NeuroBalance | Biblioteca digital de neurociencia aplicada",
+    description:
+      "Colecciones digitales sobre mente, bienestar emocional, habitos y transformacion personal.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

@@ -1,21 +1,72 @@
 ﻿"use client";
 
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { PurchaseMethod } from "@/lib/types";
 
 type CheckoutFormProps = {
   methods: PurchaseMethod[];
   productSlug: string;
+  priceLabel: string;
+  productLabel: string;
 };
 
-export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
+const providerMeta: Record<PurchaseMethod["provider"], { icon: string; kicker: string; action: string }> = {
+  mercadopago: { icon: "MP", kicker: "Pago automatico", action: "Abrir checkout" },
+  transfer: { icon: "TR", kicker: "Opcion asistida", action: "Ver transferencia" },
+  stripe: { icon: "ST", kicker: "Pago internacional", action: "Abrir checkout" },
+};
+
+const transferDetails = {
+  bank: "Banco a definir",
+  alias: "NEUROBALANCE.ALIAS",
+  cbu: "0000003100000000000000",
+  holder: "NeuroBalance",
+};
+
+const whatsappUrl =
+  "https://wa.me/5490000000000?text=Hola,%20quiero%20comprar%20la%20coleccion%20NeuroBalance%20por%20transferencia";
+
+export function CheckoutForm({ methods, productSlug, priceLabel, productLabel }: CheckoutFormProps) {
   const [selectedProvider, setSelectedProvider] = useState<PurchaseMethod["provider"]>(
     methods[0]?.provider ?? "mercadopago",
   );
   const [message, setMessage] = useState<string | null>(null);
+  const [copyMessage, setCopyMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const activeMethod = methods.find((method) => method.provider === selectedProvider) ?? methods[0];
+  const isManual = selectedProvider === "transfer";
+
+  function openAutomaticCheckout(provider: PurchaseMethod["provider"]) {
+    setSelectedProvider(provider);
+    setMessage(null);
+    dialogRef.current?.showModal();
+  }
+
+  function selectManualMode() {
+    setSelectedProvider("transfer");
+    setMessage(null);
+    setCopyMessage(null);
+    if (dialogRef.current?.open) {
+      dialogRef.current.close();
+    }
+  }
+
+  function closeDialog() {
+    dialogRef.current?.close();
+    setMessage(null);
+  }
+
+  async function copyValue(label: string, value: string) {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopyMessage(`${label} copiado`);
+      window.setTimeout(() => setCopyMessage(null), 1500);
+    } catch {
+      setCopyMessage(`No pudimos copiar ${label.toLowerCase()}`);
+    }
+  }
 
   async function handleSubmit(formData: FormData) {
     setMessage(null);
@@ -43,7 +94,7 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
       };
 
       if (!response.ok || !result.ok || !result.redirectUrl) {
-        setMessage(result.message ?? "No pudimos iniciar la compra todavía.");
+        setMessage(result.message ?? "No pudimos iniciar la compra todavia.");
         return;
       }
 
@@ -52,31 +103,112 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
   }
 
   return (
-    <div className="pricing-card reveal is-visible">
-      <div className="pricing-tabs" role="tablist" aria-label="Métodos de pago">
-        {methods.map((method) => {
-          const isActive = method.provider === selectedProvider;
-          return (
-            <button
-              key={method.provider}
-              type="button"
-              className={`ptab${isActive ? " active" : ""}`}
-              onClick={() => setSelectedProvider(method.provider)}
-            >
-              {method.title}
-            </button>
-          );
-        })}
+    <>
+      <div className="checkout-shell">
+        <div className="payment-grid" role="tablist" aria-label="Metodos de pago">
+          {methods.map((method) => {
+            const isActive = method.provider === selectedProvider;
+            const meta = providerMeta[method.provider];
+
+            return (
+              <button
+                key={method.provider}
+                type="button"
+                className={`payment-card${isActive ? " active" : ""}`}
+                onClick={() =>
+                  method.provider === "transfer"
+                    ? selectManualMode()
+                    : openAutomaticCheckout(method.provider)
+                }
+              >
+                <span className="payment-card-icon" aria-hidden="true">
+                  {meta.icon}
+                </span>
+                <span className="payment-card-kicker">{meta.kicker}</span>
+                <strong className="payment-card-title">{method.title}</strong>
+                <span className="payment-card-badge">{method.badge}</span>
+                <span className="payment-card-copy">{method.summary}</span>
+                <span className="payment-card-action">{meta.action}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {isManual ? (
+          <div className="checkout-manual-panel">
+            <div className="checkout-manual-head">
+              <div>
+                <p className="pricing-overline">Transferencia asistida</p>
+                <h3 className="checkout-manual-title">Alias y CBU listos para copiar</h3>
+              </div>
+              <div className="checkout-manual-price">{priceLabel}</div>
+            </div>
+
+            <div className="manual-bank-grid">
+              <div className="manual-bank-row">
+                <span className="manual-bank-label">Banco</span>
+                <strong>{transferDetails.bank}</strong>
+              </div>
+              <div className="manual-bank-row">
+                <span className="manual-bank-label">Titular</span>
+                <strong>{transferDetails.holder}</strong>
+              </div>
+              <div className="manual-bank-row">
+                <span className="manual-bank-label">Alias</span>
+                <div className="manual-bank-value">
+                  <strong>{transferDetails.alias}</strong>
+                  <button type="button" className="copy-button" onClick={() => copyValue("Alias", transferDetails.alias)}>
+                    Copiar
+                  </button>
+                </div>
+              </div>
+              <div className="manual-bank-row">
+                <span className="manual-bank-label">CBU</span>
+                <div className="manual-bank-value">
+                  <strong>{transferDetails.cbu}</strong>
+                  <button type="button" className="copy-button" onClick={() => copyValue("CBU", transferDetails.cbu)}>
+                    Copiar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <p className="checkout-helper">
+              Haz la transferencia, envianos el comprobante y activamos el acceso. Si prefieres, puedes escribirnos directo y te acompanamos por WhatsApp.
+            </p>
+            {copyMessage ? <p className="checkout-copy-feedback">{copyMessage}</p> : null}
+
+            <div className="manual-actions">
+              <a className="manual-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
+                Ir a WhatsApp
+              </a>
+            </div>
+          </div>
+        ) : null}
       </div>
 
-      <div className="pricing-panels">
-        <div className="ppanel active">
-          <div className="ppanel-price">ARS 29.900</div>
-          <div className="ppanel-currency">Colección completa de 7 tomos</div>
-          <div className="ppanel-methods">
-            <div className="checkout-method-copy">{activeMethod.badge}</div>
-            <div className="checkout-helper">{activeMethod.summary}</div>
-            <div className="checkout-note">{activeMethod.helper}</div>
+      <dialog ref={dialogRef} className="checkout-modal" aria-labelledby="checkout-modal-title">
+        <div className="checkout-modal-card">
+          <button type="button" className="checkout-modal-close" onClick={closeDialog} aria-label="Cerrar">
+            Cerrar
+          </button>
+
+          <div className="checkout-modal-head">
+            <p className="pricing-overline">Coleccion NeuroBalance</p>
+            <h3 id="checkout-modal-title" className="checkout-modal-title">
+              Completa tus datos para pagar con {activeMethod.badge}
+            </h3>
+            <div className="checkout-modal-price">{priceLabel}</div>
+            <p className="ppanel-currency">{productLabel}</p>
+          </div>
+
+          <div className="checkout-method-box">
+            <div className="checkout-method-head">
+              <span className="checkout-method-chip">{activeMethod.badge}</span>
+              <span className="checkout-method-tip">{providerMeta[activeMethod.provider].kicker}</span>
+            </div>
+            <p className="checkout-method-copy">{activeMethod.summary}</p>
+            <p className="checkout-helper">{activeMethod.helper}</p>
           </div>
 
           <form action={handleSubmit} className="nb-checkout-form">
@@ -96,7 +228,7 @@ export function CheckoutForm({ methods, productSlug }: CheckoutFormProps) {
 
           {message ? <p className="checkout-inline-error">{message}</p> : null}
         </div>
-      </div>
-    </div>
+      </dialog>
+    </>
   );
 }

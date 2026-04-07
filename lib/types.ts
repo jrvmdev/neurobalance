@@ -74,3 +74,13 @@ export type DeliveryRecord = {
   notes?: string;
 };
 
+export type VolumeAssetRecord = {
+  id: string;
+  volumeId: string;
+  fileName: string;
+  fileUrl: string;
+  storagePath?: string;
+  mimeType?: string;
+  sizeBytes?: number;
+  uploadedAt: string;
+};
