@@ -1,6 +1,6 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { getAdminEmail, hasBlobConfigured, hasEmailConfigured } from "@/lib/env";
-import { collectionVolumes, launchChecklist } from "@/lib/site-data";
+import { collectionVolumes, getProductBySlug, launchChecklist } from "@/lib/site-data";
 import { getStoreDiagnostics, listDeliveries, listOrders, listVolumeAssets } from "@/lib/store";
 
 type AdminPageProps = {
@@ -63,13 +63,14 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
             <div className="orders-row orders-row-head">
               <span>Orden</span>
               <span>Cliente</span>
-              <span>Proveedor</span>
+              <span>Producto</span>
               <span>Estado</span>
               <span>Accion</span>
             </div>
             {orders.map((order) => {
               const orderDeliveries = deliveries.filter((delivery) => delivery.orderId === order.id);
               const sent = orderDeliveries.filter((delivery) => delivery.status === "sent").length;
+              const product = getProductBySlug(order.productSlug);
 
               return (
                 <div key={order.id} className="orders-row">
@@ -81,10 +82,13 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                     {order.customerName}
                     <small>{order.customerEmail}</small>
                   </span>
-                  <span>{order.provider}</span>
+                  <span>
+                    {product?.name ?? order.productSlug}
+                    <small>{order.provider}</small>
+                  </span>
                   <span className={`status-badge status-${order.status}`}>{order.status}</span>
                   <span>
-                    {sent}/7 entregas enviadas
+                    {sent}/{Math.max(orderDeliveries.length, 1)} entregas enviadas
                     {order.status !== "paid" ? (
                       <form action={`/api/admin/orders/${order.id}/mark-paid`} method="POST">
                         <button className="button-secondary" type="submit">

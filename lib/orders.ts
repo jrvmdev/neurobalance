@@ -1,5 +1,5 @@
-﻿import { randomUUID } from "node:crypto";
-import { mainProduct } from "@/lib/site-data";
+import { randomUUID } from "node:crypto";
+import { getProductBySlug } from "@/lib/site-data";
 import { OrderRecord, PaymentProvider } from "@/lib/types";
 
 export type CheckoutPayload = {
@@ -10,11 +10,16 @@ export type CheckoutPayload = {
 };
 
 export function buildDraftOrder(payload: CheckoutPayload): OrderRecord {
+  const product = getProductBySlug(payload.productSlug);
+  if (!product) {
+    throw new Error("Producto no reconocido.");
+  }
+
   const currency =
     payload.provider === "mercadopago" || payload.provider === "transfer"
       ? "ARS"
       : "USD";
-  const amount = currency === "ARS" ? mainProduct.arsAmount : mainProduct.usdAmount;
+  const amount = currency === "ARS" ? product.arsAmount : product.usdAmount;
 
   return {
     id: `ord_${randomUUID().slice(0, 8)}`,
@@ -30,6 +35,5 @@ export function buildDraftOrder(payload: CheckoutPayload): OrderRecord {
 }
 
 export function isKnownProduct(slug: string) {
-  return slug === mainProduct.slug;
+  return Boolean(getProductBySlug(slug));
 }
-

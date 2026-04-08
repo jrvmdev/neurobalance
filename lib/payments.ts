@@ -1,4 +1,4 @@
-﻿import { getAppUrl, hasMercadoPagoConfigured, hasStripeConfigured } from "@/lib/env";
+import { getAppUrl, hasMercadoPagoConfigured, hasStripeConfigured } from "@/lib/env";
 import { OrderRecord, PaymentProvider } from "@/lib/types";
 
 export type CheckoutResult =
@@ -24,7 +24,7 @@ export async function createCheckoutRedirect(order: OrderRecord): Promise<Checko
       return {
         ok: true,
         provider: "transfer",
-        redirectUrl: `${getAppUrl()}/gracias?provider=transfer&status=awaiting_transfer&email=${encodeURIComponent(order.customerEmail)}&orderId=${encodeURIComponent(order.id)}`,
+        redirectUrl: `${getAppUrl()}/gracias?provider=transfer&status=awaiting_transfer&email=${encodeURIComponent(order.customerEmail)}&orderId=${encodeURIComponent(order.id)}&productSlug=${encodeURIComponent(order.productSlug)}`,
         mode: "manual",
       };
   }
@@ -42,7 +42,7 @@ async function createStripeRedirect(order: OrderRecord): Promise<CheckoutResult>
   return {
     ok: true,
     provider: "stripe",
-    redirectUrl: `${getAppUrl()}/gracias?provider=stripe&status=demo&email=${encodeURIComponent(order.customerEmail)}&orderId=${encodeURIComponent(order.id)}`,
+    redirectUrl: `${getAppUrl()}/gracias?provider=stripe&status=demo&email=${encodeURIComponent(order.customerEmail)}&orderId=${encodeURIComponent(order.id)}&productSlug=${encodeURIComponent(order.productSlug)}`,
     mode: "hosted",
   };
 }
@@ -60,8 +60,7 @@ async function createMercadoPagoRedirect(order: OrderRecord): Promise<CheckoutRe
   return {
     ok: true,
     provider: "mercadopago",
-    redirectUrl: `${getAppUrl()}/gracias?provider=mercadopago&status=demo&email=${encodeURIComponent(order.customerEmail)}&orderId=${encodeURIComponent(order.id)}`,
+    redirectUrl: `${getAppUrl()}/gracias?provider=mercadopago&status=demo&email=${encodeURIComponent(order.customerEmail)}&orderId=${encodeURIComponent(order.id)}&productSlug=${encodeURIComponent(order.productSlug)}`,
     mode: "hosted",
   };
 }
-

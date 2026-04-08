@@ -1,9 +1,9 @@
-﻿import { randomUUID } from "node:crypto";
+import { randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import postgres from "postgres";
 import { getDatabaseUrl, hasBlobConfigured, hasDatabaseConfigured } from "@/lib/env";
-import { mainProduct } from "@/lib/site-data";
+import { getVolumesForProductSlug } from "@/lib/site-data";
 import { DeliveryRecord, OrderRecord, VolumeAssetRecord } from "@/lib/types";
 
 type CommerceStore = {
@@ -281,7 +281,8 @@ export async function savePaidOrder(orderId: string, providerReference?: string)
 
     const existing = await sql!`select id from deliveries where order_id = ${orderId} limit 1`;
     if (existing.length === 0) {
-      for (const volume of mainProduct.volumes) {
+      const volumes = getVolumesForProductSlug(updatedOrder.productSlug);
+      for (const volume of volumes) {
         await sql!`
           insert into deliveries (id, order_id, volume_id, scheduled_for, status, sent_at, channel, notes)
           values (
@@ -314,7 +315,8 @@ export async function savePaidOrder(orderId: string, providerReference?: string)
 
   const existingDeliveries = store.deliveries.filter((delivery) => delivery.orderId === order.id);
   if (existingDeliveries.length === 0) {
-    for (const volume of mainProduct.volumes) {
+    const volumes = getVolumesForProductSlug(order.productSlug);
+    for (const volume of volumes) {
       store.deliveries.push({
         id: `dlv_${randomUUID().slice(0, 8)}`,
         orderId: order.id,
@@ -451,3 +453,4 @@ export async function saveVolumeAsset(asset: VolumeAssetRecord) {
 
   return asset;
 }
+

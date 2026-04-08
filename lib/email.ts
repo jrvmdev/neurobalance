@@ -1,6 +1,6 @@
-﻿import { Resend } from "resend";
+import { Resend } from "resend";
 import { getAppUrl, getResendApiKey, getResendFromEmail, hasEmailConfigured } from "@/lib/env";
-import { collectionVolumes, mainProduct } from "@/lib/site-data";
+import { collectionVolumes, getProductBySlug, mainProduct } from "@/lib/site-data";
 import { DeliveryRecord, OrderRecord } from "@/lib/types";
 
 let resendClient: Resend | null = null;
@@ -18,6 +18,7 @@ function getResendClient() {
 }
 
 export function buildDeliveryEmail(order: OrderRecord, deliveries: DeliveryRecord[]) {
+  const product = getProductBySlug(order.productSlug) ?? mainProduct;
   const volumes = deliveries
     .map((delivery) => collectionVolumes.find((volume) => volume.id === delivery.volumeId))
     .filter(Boolean);
@@ -35,15 +36,15 @@ export function buildDeliveryEmail(order: OrderRecord, deliveries: DeliveryRecor
   return {
     subject:
       deliveries.length > 1
-        ? `Tus primeros tomos de ${mainProduct.name}`
-        : `Nuevo tomo disponible de ${mainProduct.name}`,
+        ? `Tus nuevos tomos de ${product.name}`
+        : `Tu acceso a ${product.name} ya esta disponible`,
     html: `
       <div style="font-family: Arial, sans-serif; color: #1c1a17; line-height: 1.6;">
         <h1 style="font-size: 24px; margin-bottom: 12px;">Hola ${order.customerName}</h1>
-        <p>Tu compra de <strong>${mainProduct.name}</strong> sigue avanzando.</p>
+        <p>Tu compra de <strong>${product.name}</strong> sigue avanzando.</p>
         <p>En esta entrega te corresponde:</p>
         <ul>${items}</ul>
-        <p>Si no encuentras el material o necesitas reenvio, respondé este email o escribinos por WhatsApp.</p>
+        <p>Si no encuentras el material o necesitas reenvio, responde este email o escribinos por WhatsApp.</p>
         <p style="font-size: 12px; color: #6f6458;">Orden ${order.id} · ${getAppUrl()}</p>
       </div>
     `,
@@ -65,4 +66,3 @@ export async function sendDeliveryEmail(order: OrderRecord, deliveries: Delivery
 
   return { sent: true as const };
 }
-

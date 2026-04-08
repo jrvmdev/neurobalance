@@ -1,4 +1,4 @@
-﻿export type PaymentProvider = "stripe" | "mercadopago" | "transfer";
+export type PaymentProvider = "stripe" | "mercadopago" | "transfer";
 
 export type OrderStatus =
   | "pending"
@@ -38,6 +38,8 @@ export type Product = {
   supportChannels: string[];
   volumes: EbookVolume[];
   bonuses: string[];
+  purchaseMode: "collection" | "single";
+  includedVolumeIds: string[];
 };
 
 export type PurchaseMethod = {
@@ -47,6 +49,13 @@ export type PurchaseMethod = {
   summary: string;
   buttonLabel: string;
   helper: string;
+};
+
+export type CheckoutProductOption = {
+  slug: string;
+  label: string;
+  priceLabel: string;
+  summary: string;
 };
 
 export type OrderRecord = {

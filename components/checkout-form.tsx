@@ -1,13 +1,12 @@
-﻿"use client";
+"use client";
 
 import { useRef, useState, useTransition } from "react";
-import { PurchaseMethod } from "@/lib/types";
+import { CheckoutProductOption, PurchaseMethod } from "@/lib/types";
 
 type CheckoutFormProps = {
   methods: PurchaseMethod[];
-  productSlug: string;
-  priceLabel: string;
-  productLabel: string;
+  productOptions: CheckoutProductOption[];
+  initialProductSlug: string;
 };
 
 const providerMeta: Record<PurchaseMethod["provider"], { icon: string; kicker: string; action: string }> = {
@@ -23,20 +22,24 @@ const transferDetails = {
   holder: "NeuroBalance",
 };
 
-const whatsappUrl =
-  "https://wa.me/5490000000000?text=Hola,%20quiero%20comprar%20la%20coleccion%20NeuroBalance%20por%20transferencia";
-
-export function CheckoutForm({ methods, productSlug, priceLabel, productLabel }: CheckoutFormProps) {
+export function CheckoutForm({ methods, productOptions, initialProductSlug }: CheckoutFormProps) {
   const [selectedProvider, setSelectedProvider] = useState<PurchaseMethod["provider"]>(
     methods[0]?.provider ?? "mercadopago",
   );
+  const [selectedProductSlug, setSelectedProductSlug] = useState(initialProductSlug);
   const [message, setMessage] = useState<string | null>(null);
   const [copyMessage, setCopyMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const activeMethod = methods.find((method) => method.provider === selectedProvider) ?? methods[0];
+  const activeProduct =
+    productOptions.find((product) => product.slug === selectedProductSlug) ?? productOptions[0];
   const isManual = selectedProvider === "transfer";
+  const isCollection = activeProduct.slug === "coleccion-7-tomos";
+  const whatsappUrl = `https://wa.me/5490000000000?text=${encodeURIComponent(
+    `Hola, quiero comprar ${activeProduct.label} por transferencia.`,
+  )}`;
 
   function openAutomaticCheckout(provider: PurchaseMethod["provider"]) {
     setSelectedProvider(provider);
@@ -105,6 +108,25 @@ export function CheckoutForm({ methods, productSlug, priceLabel, productLabel }:
   return (
     <>
       <div className="checkout-shell">
+        <div className="checkout-product-grid" role="list" aria-label="Productos disponibles">
+          {productOptions.map((product) => {
+            const isActive = product.slug === activeProduct.slug;
+
+            return (
+              <button
+                key={product.slug}
+                type="button"
+                className={`checkout-product-card${isActive ? " active" : ""}`}
+                onClick={() => setSelectedProductSlug(product.slug)}
+              >
+                <span className="pricing-overline">{product.label}</span>
+                <strong className="checkout-product-price">{product.priceLabel}</strong>
+                <span className="checkout-product-summary">{product.summary}</span>
+              </button>
+            );
+          })}
+        </div>
+
         <div className="payment-grid" role="tablist" aria-label="Metodos de pago">
           {methods.map((method) => {
             const isActive = method.provider === selectedProvider;
@@ -138,10 +160,12 @@ export function CheckoutForm({ methods, productSlug, priceLabel, productLabel }:
           <div className="checkout-manual-panel">
             <div className="checkout-manual-head">
               <div>
-                <p className="pricing-overline">Transferencia asistida</p>
-                <h3 className="checkout-manual-title">Alias y CBU listos para copiar</h3>
+                <p className="pricing-overline">{activeProduct.label}</p>
+                <h3 className="checkout-manual-title">
+                  Transferencia para {isCollection ? "reservar la coleccion anticipada" : "comprar este tomo"}
+                </h3>
               </div>
-              <div className="checkout-manual-price">{priceLabel}</div>
+              <div className="checkout-manual-price">{activeProduct.priceLabel}</div>
             </div>
 
             <div className="manual-bank-grid">
@@ -174,7 +198,7 @@ export function CheckoutForm({ methods, productSlug, priceLabel, productLabel }:
             </div>
 
             <p className="checkout-helper">
-              Haz la transferencia, envianos el comprobante y activamos el acceso. Si prefieres, puedes escribirnos directo y te acompanamos por WhatsApp.
+              Haz la transferencia, envianos el comprobante y activamos {isCollection ? "tu reserva" : "tu acceso"}. Si prefieres, puedes escribirnos directo y te acompanamos por WhatsApp.
             </p>
             {copyMessage ? <p className="checkout-copy-feedback">{copyMessage}</p> : null}
 
@@ -194,12 +218,12 @@ export function CheckoutForm({ methods, productSlug, priceLabel, productLabel }:
           </button>
 
           <div className="checkout-modal-head">
-            <p className="pricing-overline">Coleccion NeuroBalance</p>
+            <p className="pricing-overline">{activeProduct.label}</p>
             <h3 id="checkout-modal-title" className="checkout-modal-title">
               Completa tus datos para pagar con {activeMethod.badge}
             </h3>
-            <div className="checkout-modal-price">{priceLabel}</div>
-            <p className="ppanel-currency">{productLabel}</p>
+            <div className="checkout-modal-price">{activeProduct.priceLabel}</div>
+            <p className="ppanel-currency">{activeProduct.summary}</p>
           </div>
 
           <div className="checkout-method-box">
@@ -212,7 +236,7 @@ export function CheckoutForm({ methods, productSlug, priceLabel, productLabel }:
           </div>
 
           <form action={handleSubmit} className="nb-checkout-form">
-            <input type="hidden" name="productSlug" value={productSlug} />
+            <input type="hidden" name="productSlug" value={activeProduct.slug} />
             <label>
               Nombre
               <input required name="customerName" placeholder="Tu nombre" />
@@ -222,7 +246,7 @@ export function CheckoutForm({ methods, productSlug, priceLabel, productLabel }:
               <input required type="email" name="customerEmail" placeholder="tu@email.com" />
             </label>
             <button className="ppanel-btn" type="submit" disabled={isPending}>
-              {isPending ? "Preparando compra..." : activeMethod.buttonLabel}
+              {isPending ? "Preparando compra..." : `${activeMethod.buttonLabel} · ${activeProduct.label}`}
             </button>
           </form>
 

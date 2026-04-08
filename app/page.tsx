@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
 import { CheckoutForm } from "@/components/checkout-form";
-import { collectionVolumes, faqs, mainProduct, purchaseMethods, trustPoints } from "@/lib/site-data";
+import {
+  checkoutProductOptions,
+  collectionDiscountPct,
+  collectionPriceArs,
+  collectionSavingsArs,
+  collectionVolumes,
+  faqs,
+  mainProduct,
+  purchaseMethods,
+  singleVolumePriceArs,
+  trustPoints,
+} from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Conoce como piensas, cambia como vives",
   description:
-    "NeuroBalance es una coleccion digital sobre neuroplasticidad, regulacion emocional, habitos, psicologia positiva y bienestar mental con base cientifica.",
+    "NeuroBalance es una biblioteca digital sobre neuroplasticidad, regulacion emocional, habitos y bienestar mental con tomos individuales y coleccion anticipada.",
   keywords: [
     "neurobalance",
     "neuroplasticidad",
@@ -19,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NeuroBalance | Conoce como piensas, cambia como vives",
     description:
-      "Descubre el poder de la neuroplasticidad y reprograma tu cerebro para alcanzar el bienestar emocional y mental que mereces.",
+      "Biblioteca digital sobre neuroplasticidad, habitos, regulacion emocional y bienestar mental con tomos individuales y coleccion anticipada.",
     type: "website",
     locale: "es_ES",
     siteName: "NeuroBalance",
@@ -28,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NeuroBalance | Conoce como piensas, cambia como vives",
     description:
-      "Coleccion digital sobre neuroplasticidad, habitos, regulacion emocional y bienestar mental.",
+      "Biblioteca digital sobre neuroplasticidad, habitos, regulacion emocional y bienestar mental.",
   },
 };
 
@@ -105,7 +116,7 @@ const websiteSchema = {
   name: "NeuroBalance",
   inLanguage: "es",
   description:
-    "Coleccion digital sobre neuroplasticidad, habitos, regulacion emocional y bienestar mental.",
+    "Biblioteca digital sobre neuroplasticidad, habitos, regulacion emocional y bienestar mental.",
 };
 
 const productSchema = {
@@ -113,7 +124,7 @@ const productSchema = {
   "@type": "Product",
   name: mainProduct.name,
   description:
-    "Coleccion digital de 7 tomos sobre neuroplasticidad, regulacion emocional, habitos, psicologia positiva, relaciones, proposito e integracion.",
+    "Coleccion digital anticipada de 7 tomos sobre neuroplasticidad, regulacion emocional, habitos, psicologia positiva, relaciones, proposito e integracion.",
   brand: {
     "@type": "Brand",
     name: "NeuroBalance",
@@ -179,23 +190,23 @@ export default function HomePage() {
                 <a className="btn-primary" href="#adquirir">
                   Comienza Tu Transformacion
                 </a>
-                <a className="btn-secondary" href="#fundamentos">
-                  Ver fundamentos
+                <a className="btn-secondary" href="#biblioteca">
+                  Ver biblioteca
                 </a>
               </div>
 
               <div className="hero-trust">
                 <div className="hero-trust-item">
-                  <span className="hero-trust-kicker">Coleccion I</span>
-                  <strong>7 tomos digitales</strong>
+                  <span className="hero-trust-kicker">Tomo individual</span>
+                  <strong>ARS {singleVolumePriceArs.toLocaleString("es-AR")}</strong>
                 </div>
                 <div className="hero-trust-item">
-                  <span className="hero-trust-kicker">Enfoque</span>
-                  <strong>Mente, emociones y habitos</strong>
+                  <span className="hero-trust-kicker">Coleccion anticipada</span>
+                  <strong>ARS {collectionPriceArs.toLocaleString("es-AR")}</strong>
                 </div>
                 <div className="hero-trust-item">
-                  <span className="hero-trust-kicker">Acceso</span>
-                  <strong>Acceso progresivo y acompanamiento</strong>
+                  <span className="hero-trust-kicker">Ahorro</span>
+                  <strong>{collectionDiscountPct}% sobre el total</strong>
                 </div>
               </div>
             </div>
@@ -210,9 +221,9 @@ export default function HomePage() {
                 </article>
 
                 <article className="hero-card hero-card-mid">
-                  <span className="hero-card-label">Semana 1</span>
-                  <h3>Recibes 2 tomos</h3>
-                  <p>Empieza con neuroplasticidad y regulacion emocional desde el primer dia.</p>
+                  <span className="hero-card-label">Entrega progresiva</span>
+                  <h3>Tomos 1 y 2 primero</h3>
+                  <p>Despues recibes 3 y 4, luego 5 y 6, y por ultimo el tomo 7.</p>
                 </article>
 
                 <article className="hero-card hero-card-front">
@@ -220,12 +231,12 @@ export default function HomePage() {
                     <BrandMark className="hero-card-mark" />
                     <span>Coleccion NeuroBalance</span>
                   </div>
-                  <h3>Una coleccion para comprender la mente, regular emociones y construir cambios duraderos</h3>
+                  <h3>Compra tomos individuales o reserva la coleccion anticipada con descuento</h3>
                   <p>{mainProduct.releaseModel}</p>
                   <ul className="hero-card-list">
-                    <li>2 tomos inmediatos al confirmar el pago</li>
-                    <li>1 tomo semanal hasta completar la coleccion</li>
-                    <li>Soporte por email, WhatsApp e Instagram</li>
+                    <li>Tomo individual: ARS {singleVolumePriceArs.toLocaleString("es-AR")}</li>
+                    <li>Coleccion anticipada: ARS {collectionPriceArs.toLocaleString("es-AR")}</li>
+                    <li>Ahorras ARS {collectionSavingsArs.toLocaleString("es-AR")} frente al total por separado</li>
                   </ul>
                 </article>
               </div>
@@ -239,7 +250,7 @@ export default function HomePage() {
               <p className="eyebrow">Fundamentos cientificos del cambio mental</p>
               <h2 className="section-title">Fundamentos cientificos para transformar tu manera de pensar, sentir y vivir</h2>
               <p className="section-copy">
-                Esta coleccion integra principios de psicologia, neurociencia y desarrollo personal para ayudarte a construir bienestar real desde adentro.
+                Esta biblioteca integra principios de psicologia, neurociencia y desarrollo personal para ayudarte a construir bienestar real desde adentro.
               </p>
             </div>
 
@@ -255,31 +266,26 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section-shell" id="coleccion-uno">
+        <section className="section-shell" id="biblioteca">
           <div className="container">
             <div className="section-heading split">
               <div>
-                <p className="eyebrow">Coleccion I</p>
-                <h2 className="section-title">Siete tomos para iniciar un proceso profundo de transformacion mental</h2>
+                <p className="eyebrow">Biblioteca NeuroBalance</p>
+                <h2 className="section-title">Titulos de la Coleccion I</h2>
               </div>
               <p className="section-copy">
-                La Coleccion I de NeuroBalance esta pensada como un recorrido progresivo. Empiezas con dos tomos y luego recibes uno por semana hasta completar la experiencia.
+                Puedes empezar por un tomo individual o reservar la coleccion anticipada completa. Aqui ves el mapa editorial inicial, sin mezclarlo con el detalle comercial.
               </p>
             </div>
 
-            <div className="volumes-grid">
+            <div className="library-grid">
               {collectionVolumes.map((volume) => (
-                <article key={volume.id} className="zen-card volume-card">
-                  <div className="volume-top">
-                    <span className="volume-number">Tomo {volume.number}</span>
-                    <span className={`volume-status volume-status-${volume.releaseStatus}`}>
-                      {volume.releaseStatus === "published" ? "Disponible" : `Se libera ${volume.releaseDate}`}
-                    </span>
-                  </div>
+                <article key={volume.id} className="zen-card library-card">
+                  <span className="volume-number">Tomo {volume.number}</span>
                   <h3>{volume.title}</h3>
-                  <p className="volume-promise">{volume.promise}</p>
-                  <p className="volume-outcome">{volume.outcome}</p>
-                  <p className="volume-note">{volume.deliveryNote}</p>
+                  <span className={`volume-status volume-status-${volume.releaseStatus}`}>
+                    {volume.releaseStatus === "published" ? "Disponible" : `Se libera ${volume.releaseDate}`}
+                  </span>
                 </article>
               ))}
             </div>
@@ -337,15 +343,15 @@ export default function HomePage() {
               <div className="benefits-stats">
                 <div>
                   <strong>7</strong>
-                  <span>tomos en una sola coleccion</span>
+                  <span>titulos iniciales en la Coleccion I</span>
                 </div>
                 <div>
-                  <strong>30</strong>
-                  <span>dias de garantia</span>
+                  <strong>{collectionDiscountPct}%</strong>
+                  <span>de ahorro en la coleccion anticipada</span>
                 </div>
                 <div>
-                  <strong>100%</strong>
-                  <span>digital y accesible desde cualquier lugar</span>
+                  <strong>4</strong>
+                  <span>etapas de entrega para la reserva completa</span>
                 </div>
               </div>
             </div>
@@ -373,11 +379,45 @@ export default function HomePage() {
         <section className="section-shell pricing-section" id="adquirir">
           <div className="container">
             <div className="section-heading centered">
-              <p className="eyebrow">Comienza Tu Transformacion</p>
-              <h2 className="section-title">Tu mente es tu recurso mas valioso. Dale las herramientas que necesita para florecer.</h2>
+              <p className="eyebrow">Formas de acceso</p>
+              <h2 className="section-title">Elige si quieres empezar por un tomo o reservar la coleccion anticipada</h2>
               <p className="section-copy">
-                Accede ahora a la coleccion completa y empieza un recorrido guiado por principios de neurociencia, regulacion emocional y desarrollo personal con base cientifica.
+                NeuroBalance no se compra de una sola manera. Puedes entrar por un titulo individual o asegurar la Coleccion I completa con precio preferencial.
               </p>
+            </div>
+
+            <div className="offer-grid">
+              <article className="pricing-card offer-card">
+                <div className="pricing-panels offer-panels">
+                  <p className="pricing-overline">Tomo individual</p>
+                  <h3 className="offer-title">Empieza por el titulo que mas resuene contigo</h3>
+                  <div className="ppanel-price">ARS {singleVolumePriceArs.toLocaleString("es-AR")}</div>
+                  <p className="offer-copy">Ideal para quien quiere entrar por un tema puntual y construir su propia biblioteca tomo por tomo.</p>
+                  <ul className="offer-list">
+                    <li>Acceso por tomo</li>
+                    <li>Misma calidad editorial</li>
+                    <li>Perfecto para compra puntual</li>
+                  </ul>
+                  <a className="btn-secondary offer-link" href="#biblioteca">
+                    Ver titulos disponibles
+                  </a>
+                </div>
+              </article>
+
+              <article className="pricing-card offer-card offer-card-featured">
+                <div className="pricing-card-glow" />
+                <div className="pricing-panels offer-panels">
+                  <p className="pricing-overline">Coleccion anticipada</p>
+                  <h3 className="offer-title">Reserva los 7 tomos con precio preferencial</h3>
+                  <div className="ppanel-price">ARS {collectionPriceArs.toLocaleString("es-AR")}</div>
+                  <p className="offer-copy">Aseguras toda la Coleccion I desde hoy y entras al recorrido editorial completo con descuento real.</p>
+                  <ul className="offer-list">
+                    <li>Ahorro de ARS {collectionSavingsArs.toLocaleString("es-AR")}</li>
+                    <li>Descuento del {collectionDiscountPct}% sobre el total individual</li>
+                    <li>Entrega en 4 etapas: 1-2 / 3-4 / 5-6 / 7</li>
+                  </ul>
+                </div>
+              </article>
             </div>
 
             <div className="trust-strip">
@@ -388,11 +428,12 @@ export default function HomePage() {
               ))}
             </div>
 
+            <p className="pricing-note">La compra desde esta web ya permite elegir entre la coleccion anticipada completa o un tomo individual puntual.</p>
+
             <CheckoutForm
               methods={purchaseMethods}
-              productSlug={mainProduct.slug}
-              priceLabel={`ARS ${mainProduct.arsAmount.toLocaleString("es-AR")}`}
-              productLabel="Coleccion completa de 7 tomos"
+              productOptions={checkoutProductOptions}
+              initialProductSlug={mainProduct.slug}
             />
 
             <div className="faq-grid">
@@ -433,4 +474,8 @@ export default function HomePage() {
     </>
   );
 }
+
+
+
+
 

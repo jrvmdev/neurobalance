@@ -1,4 +1,10 @@
-﻿import { EbookVolume, OrderRecord, Product, PurchaseMethod } from "@/lib/types";
+import { CheckoutProductOption, EbookVolume, OrderRecord, Product, PurchaseMethod } from "@/lib/types";
+
+export const singleVolumePriceArs = 7999;
+export const collectionPriceArs = 34999;
+export const collectionListPriceArs = singleVolumePriceArs * 7;
+export const collectionSavingsArs = collectionListPriceArs - collectionPriceArs;
+export const collectionDiscountPct = Number(((collectionSavingsArs / collectionListPriceArs) * 100).toFixed(1));
 
 export const collectionVolumes: EbookVolume[] = [
   {
@@ -16,7 +22,7 @@ export const collectionVolumes: EbookVolume[] = [
     outcome: "Vas a dejar de ver tus habitos mentales como algo fijo.",
     releaseStatus: "published",
     releaseDate: "2026-04-07",
-    deliveryNote: "Se envia apenas se confirma el pago durante la semana 1.",
+    deliveryNote: "Disponible desde la primera entrega y tambien como tomo individual.",
   },
   {
     id: "tomo-2",
@@ -33,7 +39,7 @@ export const collectionVolumes: EbookVolume[] = [
     outcome: "Mas calma, menos reactividad, mejores decisiones.",
     releaseStatus: "published",
     releaseDate: "2026-04-07",
-    deliveryNote: "Se envia apenas se confirma el pago durante la semana 1.",
+    deliveryNote: "Disponible desde la primera entrega y tambien como tomo individual.",
   },
   {
     id: "tomo-3",
@@ -50,7 +56,7 @@ export const collectionVolumes: EbookVolume[] = [
     outcome: "Una rutina que si se puede mantener en la vida real.",
     releaseStatus: "scheduled",
     releaseDate: "2026-04-14",
-    deliveryNote: "Se enviara automaticamente en la semana 2 a quienes hayan comprado la coleccion anticipada.",
+    deliveryNote: "Forma parte de la segunda entrega junto al tomo 4 en la coleccion anticipada.",
   },
   {
     id: "tomo-4",
@@ -66,8 +72,8 @@ export const collectionVolumes: EbookVolume[] = [
     ],
     outcome: "Mas bienestar cotidiano, sin caer en positivismo vacio.",
     releaseStatus: "scheduled",
-    releaseDate: "2026-04-21",
-    deliveryNote: "Se enviara automaticamente en la semana 3 a quienes hayan comprado la coleccion anticipada.",
+    releaseDate: "2026-04-14",
+    deliveryNote: "Forma parte de la segunda entrega junto al tomo 3 en la coleccion anticipada.",
   },
   {
     id: "tomo-5",
@@ -83,8 +89,8 @@ export const collectionVolumes: EbookVolume[] = [
     ],
     outcome: "Vinculos mas seguros y menos desgaste emocional.",
     releaseStatus: "scheduled",
-    releaseDate: "2026-04-28",
-    deliveryNote: "Se enviara automaticamente en la semana 4 a quienes hayan comprado la coleccion anticipada.",
+    releaseDate: "2026-04-21",
+    deliveryNote: "Forma parte de la tercera entrega junto al tomo 6 en la coleccion anticipada.",
   },
   {
     id: "tomo-6",
@@ -100,8 +106,8 @@ export const collectionVolumes: EbookVolume[] = [
     ],
     outcome: "Mas claridad para decidir hacia donde queres ir.",
     releaseStatus: "scheduled",
-    releaseDate: "2026-05-05",
-    deliveryNote: "Se enviara automaticamente en la semana 5 a quienes hayan comprado la coleccion anticipada.",
+    releaseDate: "2026-04-21",
+    deliveryNote: "Forma parte de la tercera entrega junto al tomo 5 en la coleccion anticipada.",
   },
   {
     id: "tomo-7",
@@ -117,31 +123,92 @@ export const collectionVolumes: EbookVolume[] = [
     ],
     outcome: "Un puente claro entre leer, aplicar y sostener cambios.",
     releaseStatus: "scheduled",
-    releaseDate: "2026-05-12",
-    deliveryNote: "Se enviara automaticamente en la semana 6 a quienes hayan comprado la coleccion anticipada.",
+    releaseDate: "2026-04-28",
+    deliveryNote: "Se entrega solo en la cuarta etapa de la coleccion anticipada.",
   },
 ];
 
 export const mainProduct: Product = {
   id: "neurobalance-coleccion-7-tomos",
   slug: "coleccion-7-tomos",
-  name: "Coleccion NeuroBalance de 7 tomos",
+  name: "Coleccion anticipada NeuroBalance",
   shortDescription:
-    "Guias digitales disenadas con rigor cientifico para reprogramar tu mente, construir habitos duraderos y alcanzar el equilibrio emocional que mereces.",
-  heroPrice: "Precio promocional anticipado: ARS 29.900",
-  arsAmount: 29900,
-  usdAmount: 29,
+    "Biblioteca digital de bienestar mental con tomos individuales y una coleccion anticipada con precio preferencial.",
+  heroPrice: "Coleccion anticipada: ARS 34.999",
+  arsAmount: collectionPriceArs,
+  usdAmount: 34,
   format: "PDFs digitales",
-  delivery: "2 tomos en la semana 1 y luego 1 por semana",
-  releaseModel: "Semana 1 se entregan tomo 1 y 2. Desde la semana 2 se entrega 1 tomo por semana hasta completar los 7.",
+  delivery: "Tomos 1 y 2 en la primera entrega, 3 y 4 en la segunda, 5 y 6 en la tercera y 7 en la cuarta.",
+  releaseModel:
+    "La coleccion anticipada se entrega en 4 etapas: primero recibes los tomos 1 y 2, luego 3 y 4, despues 5 y 6, y al final el tomo 7.",
   supportChannels: ["Email", "WhatsApp", "Instagram"],
   volumes: collectionVolumes,
   bonuses: [
-    "Precio anticipado de lanzamiento para la coleccion completa",
-    "Checklist de implementacion de 30 dias",
-    "Guia rapida de habitos y regulacion emocional",
+    "Precio anticipado para asegurar la coleccion completa",
+    "Ahorro frente a comprar los 7 tomos por separado",
+    "Acceso progresivo al recorrido completo NeuroBalance",
   ],
+  purchaseMode: "collection",
+  includedVolumeIds: collectionVolumes.map((volume) => volume.id),
 };
+
+export const volumeProducts: Product[] = collectionVolumes.map((volume) => ({
+  id: `producto-${volume.id}`,
+  slug: volume.id,
+  name: `Tomo ${volume.number}: ${volume.title}`,
+  shortDescription: volume.promise,
+  heroPrice: `Tomo individual: ARS ${singleVolumePriceArs.toLocaleString("es-AR")}`,
+  arsAmount: singleVolumePriceArs,
+  usdAmount: 8,
+  format: "PDF digital",
+  delivery:
+    volume.releaseStatus === "published"
+      ? "Entrega disponible desde la confirmacion del pago."
+      : `Se entrega apenas se libera el ${volume.releaseDate}.`,
+  releaseModel:
+    volume.releaseStatus === "published"
+      ? "Accedes a este tomo de manera individual apenas se confirma el pago."
+      : `Reservas este tomo hoy y lo recibes apenas llegue su fecha de liberacion: ${volume.releaseDate}.`,
+  supportChannels: ["Email", "WhatsApp", "Instagram"],
+  volumes: [volume],
+  bonuses: [
+    "Compra puntual por tema",
+    "Mismo enfoque editorial NeuroBalance",
+    "Ideal para armar tu propia biblioteca",
+  ],
+  purchaseMode: "single",
+  includedVolumeIds: [volume.id],
+}));
+
+export const productCatalog: Product[] = [mainProduct, ...volumeProducts];
+
+export const checkoutProductOptions: CheckoutProductOption[] = [
+  {
+    slug: mainProduct.slug,
+    label: "Coleccion anticipada",
+    priceLabel: `ARS ${mainProduct.arsAmount.toLocaleString("es-AR")}`,
+    summary: `Los 7 tomos con ${collectionDiscountPct}% de ahorro y entrega en 4 etapas.`,
+  },
+  ...volumeProducts.map((product, index) => ({
+    slug: product.slug,
+    label: `Tomo ${index + 1}`,
+    priceLabel: `ARS ${product.arsAmount.toLocaleString("es-AR")}`,
+    summary: product.name,
+  })),
+];
+
+export function getProductBySlug(slug: string) {
+  return productCatalog.find((product) => product.slug === slug);
+}
+
+export function getVolumesForProductSlug(slug: string) {
+  const product = getProductBySlug(slug);
+  if (!product) {
+    return [];
+  }
+
+  return collectionVolumes.filter((volume) => product.includedVolumeIds.includes(volume.id));
+}
 
 export const purchaseMethods: PurchaseMethod[] = [
   {
@@ -149,8 +216,8 @@ export const purchaseMethods: PurchaseMethod[] = [
     title: "Argentina",
     badge: "Mercado Pago",
     summary: "Paga con dinero en cuenta, debito, credito o cuotas segun disponibilidad.",
-    buttonLabel: "Comprar con Mercado Pago",
-    helper: "Flujo automatico ideal para ventas en Argentina.",
+    buttonLabel: "Comprar ahora",
+    helper: "Flujo automatico ideal para compras en Argentina.",
   },
   {
     provider: "transfer",
@@ -163,40 +230,40 @@ export const purchaseMethods: PurchaseMethod[] = [
 ];
 
 export const trustPoints = [
-  "Garantia 30 dias",
-  "Entrega semanal sin perder el precio promocional",
-  "Pago 100% seguro con Mercado Pago o transferencia",
-  "Soporte humano solo si hace falta",
+  "Tomo individual: ARS 7.999",
+  "Coleccion anticipada: ARS 34.999",
+  `Ahorro anticipado del ${collectionDiscountPct}%`,
+  "Entrega progresiva en 4 etapas",
 ];
 
 export const faqs = [
   {
-    question: "Que recibo apenas pago?",
+    question: "Puedo comprar un solo tomo?",
     answer:
-      "Recibes de inmediato los tomos 1 y 2 de la semana 1. Luego se te envia 1 tomo por semana hasta completar la coleccion de 7.",
+      "Si. Cada tomo puede comprarse por separado a ARS 7.999. La coleccion anticipada existe para quien quiere asegurar los 7 con mejor precio.",
   },
   {
-    question: "La coleccion se puede comprar cuando ya esten los 7 tomos completos?",
+    question: "Que recibo si compro la coleccion anticipada?",
     answer:
-      "Si. La coleccion completa se puede seguir comprando tambien cuando ya esten publicados los 7 tomos.",
+      "Recibes los tomos 1 y 2 en la primera entrega. Luego llegan 3 y 4 en la segunda, 5 y 6 en la tercera y el tomo 7 en la cuarta.",
+  },
+  {
+    question: "Cuanto ahorro con la coleccion anticipada?",
+    answer:
+      `Comprar los 7 tomos por separado suma ARS ${collectionListPriceArs.toLocaleString("es-AR")}. La coleccion anticipada cuesta ARS ${collectionPriceArs.toLocaleString("es-AR")}, asi que ahorras ARS ${collectionSavingsArs.toLocaleString("es-AR")}.`,
   },
   {
     question: "Tengo que hablar por WhatsApp para comprar?",
     answer:
-      "No. WhatsApp queda como canal de soporte y reenvio. El flujo principal de compra es directo desde la web.",
-  },
-  {
-    question: "Que pasa si no encuentro el mail o necesito reenvio?",
-    answer:
-      "Se puede reenviar desde admin o atender manualmente por email, WhatsApp o Instagram sin cambiar el flujo principal.",
+      "No para pagar desde la web. WhatsApp queda como soporte y como respaldo para coordinaciones manuales por transferencia.",
   },
 ];
 
 export const launchChecklist = [
   "Cobro automatico por Mercado Pago",
   "Transferencia como respaldo",
-  "Entrega inmediata de 2 tomos en la semana 1",
-  "Envio semanal de 1 tomo hasta completar los 7",
+  "Compra de tomos individuales",
+  "Coleccion anticipada en 4 etapas",
   "Reenvio manual desde admin cuando haga falta",
 ];
 
@@ -216,10 +283,10 @@ export const mockOrders: OrderRecord[] = [
     id: "ord_1002",
     customerEmail: "cliente2@ejemplo.com",
     customerName: "Daniel Torres",
-    productSlug: mainProduct.slug,
+    productSlug: "tomo-1",
     provider: "mercadopago",
     status: "pending",
-    amount: mainProduct.arsAmount,
+    amount: singleVolumePriceArs,
     currency: "ARS",
     createdAt: "2026-04-06T12:15:00.000Z",
   },
